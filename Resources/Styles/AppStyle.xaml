@@ -15,7 +15,12 @@
     </Style>
     <Style x:Key="Title" TargetType="Label">
         <Setter Property="FontAttributes" Value="Bold"/>
-        <Setter Property="FontSize" Value="Large"/>
-        
+        <Setter Property="FontSize" Value="Large"/>        
+    </Style>
+    <Style x:Key="WeatherTitle" TargetType="Label">
+        <Setter Property="FontFamily" Value="RubikL"/>
+    </Style>
+    <Style x:Key="WeatherValue" TargetType="Label">
+        <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
 </ResourceDictionary>
