@@ -49,11 +49,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\Rubik-Light.ttf" />
+	  <None Remove="Resources\Fonts\Rubik-Regular.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Folder Include="MVVM\Models\" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="MVVM\Views\WeatherView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\AppStyle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
