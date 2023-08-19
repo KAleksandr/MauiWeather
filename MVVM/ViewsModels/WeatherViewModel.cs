@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MauiWeather.MVVM.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -9,13 +11,34 @@ namespace MauiWeather.MVVM.ViewsModels
 {
     public class WeatherViewModel
     {
+        public WeatherData WeatherData { get; set; }
+        private HttpClient client;
+        public WeatherViewModel()
+        {
+            client= new HttpClient();
+        }
+
         public ICommand SearchCommand =>
              new Command(async(searchText) =>
              {
                  var location =
                  await GetCoordinatesAsync(searchText.ToString());
-
+                 await GetWeather(location);
              });
+        private async Task GetWeather(Location location)
+        {
+            var url = $"https://api.open-meteo.com/v1/forecast?latitude={location.Latitude}&longitude={location.Longitude}&hourly=temperature_2m&daily=weathercode,temperature_2m_max,temperature_2m_min&current_weather=true&timezone=Europe%2FLondon";
+          var response =  await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                using(var responseStream = await response.Content.ReadAsStreamAsync())
+                {
+                    var data = await JsonSerializer.DeserializeAsync<WeatherData>(responseStream);
+                    WeatherData = data;
+                }
+            }
+        }
+
         private async Task<Location> GetCoordinatesAsync(string address)
         {
             IEnumerable<Location> locations = await Geocoding.Default.GetLocationsAsync(address);
