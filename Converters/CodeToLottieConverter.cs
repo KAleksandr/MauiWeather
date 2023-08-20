@@ -12,8 +12,7 @@ namespace MauiWeather.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = value as string;
-            Int32.TryParse(val, out int code);
+            var code = (int)value;
             var lottienImageSource = new SKFileLottieImageSource();
 
             switch (code)

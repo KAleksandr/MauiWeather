@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
@@ -12,9 +13,10 @@ namespace MauiWeather.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-           var val = value as string;
-            Int32.TryParse(val, out int code);
             
+            var code = (int)value;
+                     
+           
 
             switch (code)
             {

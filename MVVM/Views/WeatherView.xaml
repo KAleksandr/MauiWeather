@@ -39,16 +39,8 @@
                 <Label Style="{StaticResource WeatherValue}" Text="{Binding WeatherData.current_weather.weathercode, Converter={StaticResource CodeToWeatherConverter}}" />
             </VerticalStackLayout>
         </Grid>
-        <CollectionView Grid.Row="4">
-            <CollectionView.ItemsSource>
-            <x:Array Type="{x:Type x:String}">
-                <x:String>1</x:String>
-                <x:String>2</x:String>
-                <x:String>3</x:String>
-                <x:String>4</x:String>
-                <x:String>5</x:String>
-            </x:Array>
-            </CollectionView.ItemsSource>
+        <CollectionView Grid.Row="4" ItemsSource="{Binding  WeatherData.daily2}">
+          
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal"/>
             </CollectionView.ItemsLayout>
@@ -60,10 +52,11 @@
                                 IsAnimationEnabled="False"
                                 WidthRequest="50"
                                 HeightRequest="50"
-                                Source="mist.json"/>
-                            <Label Text="08.02.2050" TextColor="{StaticResource Yellow100Accent}"/>
-                            <Label Text="50°"/>
-                            <Label Text="Sunny"/>                           
+                                Source="{Binding weathercode, Converter={StaticResource CodeToLottieConverter}}"/>
+                            <Label Text="{Binding time, StringFormat='{0: dd MMMM yyyy}'}" TextColor="{StaticResource Yellow100Accent}"/>
+                            <Label Text="{Binding temperature_2m_max, StringFormat='max {0}°C'}"/>
+                            <Label Text="{Binding temperature_2m_min, StringFormat='min {0}°C'}"/>
+                            <Label Text="{Binding weathercode, Converter={StaticResource CodeToWeatherConverter}}"/>                           
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
