@@ -27,7 +27,7 @@ namespace MauiWeather.MVVM.ViewsModels
              {
                  PlaceName = searchText.ToString();
                  var location =
-                 await GetCoordinatesAsync(PlaceName);
+                 await GetCoordinatesAsync(searchText.ToString());
                  await GetWeather(location);
              });
         private async Task GetWeather(Location location)
