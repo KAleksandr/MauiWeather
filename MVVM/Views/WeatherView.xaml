@@ -20,12 +20,12 @@
                        SearchCommand="{Binding SearchCommand}"
                        SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}"/>
         </Grid>
-        <VerticalStackLayout Grid.Row="1" Style="{StaticResource MainStatckLayout}">
+        <VerticalStackLayout Grid.Row="1" Style="{StaticResource MainStatckLayout}" IsVisible="{Binding IsVisible}">
             <Label Style="{StaticResource Title}" Text="{Binding PlaceName}"/>
             <Label Text="{Binding Date, StringFormat='{0: dd MMMM yyyy}'}"/>
         </VerticalStackLayout>
-        <skia:SKLottieView Grid.Row="2" RepeatCount="-1" Source="{Binding WeatherData.current_weather.weathercode, Converter={StaticResource CodeToLottieConverter}}"/>
-        <Grid Grid.Row="3" ColumnDefinitions="*,*,*">
+        <skia:SKLottieView Grid.Row="2" Padding="10" RepeatCount="-1" Source="{Binding WeatherData.current_weather.weathercode, Converter={StaticResource CodeToLottieConverter}}"/>
+        <Grid Grid.Row="3" ColumnDefinitions="*,*,*"  IsVisible="{Binding IsVisible}">
             <VerticalStackLayout HorizontalOptions="Center" Spacing="10">
                 <Label Style="{StaticResource WeatherTitle}" Text="Temp"/>
                 <Label Style="{StaticResource WeatherValue}" Text="{Binding WeatherData.current_weather.temperature, StringFormat='{0}°C'}"/>                
@@ -62,5 +62,9 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <Grid Grid.Row="5" Margin="-5" BackgroundColor="Black" Opacity=".9" IsVisible="{Binding IsLoading}">
+            <ActivityIndicator IsRunning="True" VerticalOptions="Center"/>
+        </Grid>
     </Grid>
 </ContentPage>
